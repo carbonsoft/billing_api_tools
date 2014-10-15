@@ -1,0 +1,10 @@
+#!/bin/bash
+
+. /devel/bin/common.hook
+#TODO Сделать проверку версий
+DIR=$ro_image/usr/local/lib
+mkdir -p $DIR
+echo "Copy $PROG"
+rsync $RSYNC_OPTS $APP/src/$PROG $DIR
+
+
