@@ -92,7 +92,9 @@ class API
         $pattern='http://%s/rest_api/?%s';
         if($this->system_api){
             $pattern='http://%s/system_api/?%s';
-            $params['psw']=$this->config['network']['api.'.$this->context.'.psw'][0];
+            if ($this->config and array_key_exists('network',$this->config) and array_key_exists('api.' . $this->context . '.psw',$this->config['network'])) {
+                $params['psw'] = $this->config['network']['api.' . $this->context . '.psw'][0];
+            }
             $params['context']=$this->context;
         }
         $encoded_params = http_build_query($params);

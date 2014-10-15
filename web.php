@@ -8,9 +8,9 @@
 include_once('api_main.php');
 class WebCashApi extends API
 {
-    var $context='webcash';
+    var $context='web';
     function get_vpn_const(){
-        return $this->call_func('webcash.get_vpn_const',array());
+        return $this->call_func('web_cabinet.get_vpn_const',array(),'Users');
     }
 
 }
