@@ -6,7 +6,7 @@
  * Time: 9:32 AM
  */
 include_once('api_main.php');
-class WebCashApi extends API
+class WebCabinetApi extends API
 {
     var $context='web';
     function get_vpn_const(){
