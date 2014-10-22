@@ -22,7 +22,7 @@ class API
         fclose($f);
     }
 
-    public function __construct($context='webcash',$system_api=True){
+    public function __construct($context='web',$system_api=True){
         $this->system_api=$system_api;
         if (!$this->context) {
             $this->context = $context;
@@ -162,6 +162,6 @@ if (basename($argv[0]) == basename(__FILE__)) {
         'method1' => 'objects.filter',
         'arg1' => '{"is_folder": 1}',
     );
-    $client = new API();
+    $client = new API('',False);
     $res_arr = $client->call_api($params);
 }
