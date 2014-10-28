@@ -11,8 +11,28 @@ class API
     var $hash;
     var $config;
     var $system_api=False;
-    var $context=False;
+    var $context='web';
     private $auth_url='';
+
+    function API($context='web',$system_api=True)
+    {
+        $this->system_api=$system_api;
+
+        if ($this->context!=$context) {
+            $this->context = $context;
+        }
+        $this->auth_url='http://'.$this->remoute_addr.'/admin/';
+        if(!$this->system_api){
+            $this->login();
+        }
+        $this->get_config();
+        if ($this->config and $this->config['api'] and $this->config['api']['remoute_addr']){
+            $this->remoute_addr = $this->config['api']['remoute_addr'][0].':'.$this->config['api']['remoute_port'][0];
+        }
+        else{
+            $this->remoute_addr='169.1.80.82:8082';
+        }
+    }
 
     function log_it($msg)
     {
@@ -20,22 +40,6 @@ class API
         $f = fopen('/var/log/api.log', 'a+');
         fwrite($f, $msg);
         fclose($f);
-    }
-
-    public function __construct($context='web',$system_api=True){
-        $this->system_api=$system_api;
-
-        if (!$this->context) {
-//            var_dump('lpplp');
-            $this->context = $context;
-        }
-//        var_dump($this);
-        $this->API();
-        $this->auth_url='http://'.$this->remoute_addr.'/admin/';
-        if(!$this->system_api){
-            $this->login();
-        }
-
     }
 
     function get_config()
@@ -68,16 +72,6 @@ class API
 
     }
 
-    function API()
-    {
-        $this->get_config();
-        if ($this->config and $this->config['api'] and $this->config['api']['remoute_addr']){
-            $this->remoute_addr = $this->config['api']['remoute_addr'][0];
-        }
-        else{
-            $this->remoute_addr='169.1.80.82';
-        }
-    }
 
     function call_api($params){
         return $this->__call_api($params);
@@ -143,13 +137,11 @@ class API
         return json_encode($arr);
     }
 
-    function call_func($func_name,$params,$model_name='Abonents'){
+    function call_func($func_name,$params,$model_name='Abonents',$api_params=array()){
         $client = new API(True);
-        $api_params = array(
-            'model' => $model_name,
-            'arg1' => $this->arr_to_args($params),
-            'method1' => $func_name,
-        );
+        $api_params['model'] =$model_name;
+        $api_params['arg1'] =$this->arr_to_args($params);
+        $api_params['method1'] = $func_name;
         $res_arr = $client->call_api($api_params);
         $this->log_it($func_name.': API_REQUEST: ' . print_r($api_params, true));
         $this->log_it($func_name.': API_RESULT: ' . print_r($res_arr, true));

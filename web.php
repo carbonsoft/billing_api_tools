@@ -9,8 +9,8 @@ include_once('api_main.php');
 class WebCabinetApi extends API
 {
     var $context='web';
-    function __construct($suid){
-        parent::__construct();
+    function WebCabinetApi($suid){
+        parent::API();
         $this->suid=$suid;
     }
 
@@ -18,9 +18,9 @@ class WebCabinetApi extends API
         return $this->call_func('web_cabinet.get_vpn_const',array(),'Users');
     }
 
-    function call_api($params){
-        $params['suid']=$this->suid;
-        parent::call_api($params);
+    function call_func($func_name,$params,$model_name='Abonents'){
+        $params['suid'] =$this->suid;
+        return parent::call_func($func_name,$params,$model_name);
     }
 
 }
