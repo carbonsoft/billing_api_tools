@@ -11,7 +11,7 @@ class API
     var $hash;
     var $config;
     var $system_api=False;
-    var $context;
+    var $context=False;
     private $auth_url='';
 
     function log_it($msg)
@@ -24,9 +24,12 @@ class API
 
     public function __construct($context='web',$system_api=True){
         $this->system_api=$system_api;
+
         if (!$this->context) {
+//            var_dump('lpplp');
             $this->context = $context;
         }
+//        var_dump($this);
         $this->API();
         $this->auth_url='http://'.$this->remoute_addr.'/admin/';
         if(!$this->system_api){

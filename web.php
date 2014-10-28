@@ -9,7 +9,8 @@ include_once('api_main.php');
 class WebCabinetApi extends API
 {
     var $context='web';
-    function WebCabinetApi($suid){
+    function __construct($suid){
+        parent::__construct();
         $this->suid=$suid;
     }
 
