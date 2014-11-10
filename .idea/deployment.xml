@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="On explicit save action (Ctrl+S)" serverName="170-55">
+    <serverData>
+      <paths name="10.90.220.170">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/app/asr_billing/usr/local/lib/billing_api_tools" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="170-55">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/app/asr_cabinet/usr/local/lib/billing_api_tools" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="kag">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/app/asr_cabinet/usr/local/lib/billing_api_tools" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ON_EXPLICIT_SAVE" />
+  </component>
+</project>
+

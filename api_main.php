@@ -7,7 +7,7 @@
  */
 class API
 {
-    var $remoute_addr;
+    var $remoute_addr='169.1.80.82:8082';
     var $hash;
     var $config;
     var $system_api=False;
@@ -26,11 +26,10 @@ class API
             $this->login();
         }
         $this->get_config();
-        if ($this->config and $this->config['api'] and $this->config['api']['remoute_addr']){
+        if ($this->config and array_key_exists('api',$this->config) and $this->config['api'] and $this->config['api']['remoute_addr']){
             $this->remoute_addr = $this->config['api']['remoute_addr'][0].':'.$this->config['api']['remoute_port'][0];
-        }
-        else{
-            $this->remoute_addr='169.1.80.82:8082';
+            $this->login=$this->config['api']['login'][0];
+            $this->pass=$this->config['api']['password'][0];
         }
     }
 
@@ -40,6 +39,7 @@ class API
         $f = fopen('/var/log/api.log', 'a+');
         fwrite($f, $msg);
         fclose($f);
+        print($msg);
     }
 
     function get_config()
@@ -54,18 +54,17 @@ class API
     }
 
     private function login(){
-        $login=$this->config['api']['login'][0];
-        $pass=$this->config['api']['password'][0];
         $params_ar=array(
-            "username"=>$login,
-            "password"=>$pass,
+            "username"=>$this->login,
+            "password"=>$this->pass,
             "api" => "Y",
-            "koko" => "koko",
             "format"=>"json"
         );
         $params_ar=array_map('urlencode', $params_ar);
         $params='?';
         $params .= http_build_query($params_ar);
+        $this->log_it($this->auth_url.$params);
+        require_once('bootstrap.php');
         $response=\Httpful\Request::get($this->auth_url.$params)->send();
         $this->hash=$response->body;
 
@@ -159,4 +158,5 @@ if (basename($argv[0]) == basename(__FILE__)) {
     );
     $client = new API('',False);
     $res_arr = $client->call_api($params);
+    print_r($res_arr);
 }

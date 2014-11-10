@@ -1,8 +1,5 @@
-PHP класс для работы с API Carbon Billing 5
-Для работы необходим пакет https://github.com/nategood/httpful
-Пример использования:
+<?php
 
-<code>
 include_once('api_main.php');
 class Billing extends API{
     var $login='root';
@@ -19,4 +16,3 @@ if (basename($argv[0]) == basename(__FILE__)) {
     $res_arr = $client->call_api($params);
     var_dump($res_arr);
 }
-</code>
