@@ -39,7 +39,6 @@ class API
         $f = fopen('/var/log/api.log', 'a+');
         fwrite($f, $msg);
         fclose($f);
-        print($msg);
     }
 
     function get_config()
