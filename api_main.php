@@ -7,7 +7,7 @@
  */
 class API
 {
-    var $remoute_addr='169.1.80.82:8082';
+    var $remoute_addr='169.254.80.82:8082';
     var $hash;
     var $config;
     var $system_api=False;
