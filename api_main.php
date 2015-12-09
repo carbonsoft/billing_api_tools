@@ -18,6 +18,13 @@ class API
     {
         $this->system_api=$system_api;
 
+        $this->get_config();
+        if ($this->config and array_key_exists('api',$this->config) and $this->config['api'] and $this->config['api']['remoute_addr']){
+            $this->remoute_addr = $this->config['api']['remoute_addr'][0];
+            $this->login=$this->config['api']['login'][0];
+            $this->pass=$this->config['api']['password'][0];
+        }
+
         if ($this->context!=$context) {
             $this->context = $context;
         }
@@ -25,12 +32,7 @@ class API
         if(!$this->system_api){
             $this->login();
         }
-        $this->get_config();
-        if ($this->config and array_key_exists('api',$this->config) and $this->config['api'] and $this->config['api']['remoute_addr']){
-            $this->remoute_addr = $this->config['api']['remoute_addr'][0].':'.$this->config['api']['remoute_port'][0];
-            $this->login=$this->config['api']['login'][0];
-            $this->pass=$this->config['api']['password'][0];
-        }
+
     }
 
     function log_it($msg)
