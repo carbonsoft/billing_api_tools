@@ -6,5 +6,5 @@ DIR=$ro_image/usr/local/lib
 mkdir -p $DIR
 echo "Copy $PROG"
 rsync $RSYNC_OPTS $APP/src/$PROG $DIR
-
+rsync $RSYNC_OPTS $APP/src/$PROG/httpful.phar $ro_image/usr/share/php/
 

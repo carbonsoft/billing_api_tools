@@ -65,7 +65,7 @@ class API
         $params='?';
         $params .= http_build_query($params_ar);
         $this->log_it($this->auth_url.$params);
-        require_once('bootstrap.php');
+        require_once('httpful.phar');
         $response=\Httpful\Request::get($this->auth_url.$params)->send();
         $this->hash=$response->body;
 
