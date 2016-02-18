@@ -7,7 +7,7 @@
  */
 class API
 {
-    var $remoute_addr='169.254.80.82:8082';
+    var $remoute_addr;
     var $hash;
     var $config;
     var $system_api=False;
@@ -23,6 +23,8 @@ class API
             $this->remoute_addr = $this->config['api']['remoute_addr'][0];
             $this->login=$this->config['api']['login'][0];
             $this->pass=$this->config['api']['password'][0];
+        } else {
+            $this->log_it('API_INIT: Ошибка присвоения remoute_addr, login, pass');
         }
 
         if ($this->context!=$context) {
